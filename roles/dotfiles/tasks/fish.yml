@@ -9,3 +9,27 @@
   user:
     name: "{{ workstation_user }}"
     shell: /usr/bin/fish
+
+- name: Ensure ~/.config/fish directory exists in user home.
+  file:
+    path: /home/{{ ansible_ssh_user }}/.config/fish
+    state: directory
+
+- name: Ensure ~/.config/fish/functions directory exists in user home.
+  file:
+    path: /home/{{ ansible_ssh_user }}/.config/fish/functions
+    state: directory
+
+- name: Copy config.fish to correct path.
+  copy:
+    src: config.fish
+    dest: /home/{{ ansible_ssh_user }}/.config/fish
+    mode: 0664
+    owner: "{{ ansible_ssh_user }}"
+
+- name: Copy updatevim.fish to correct path
+  copy:
+    src: updatevim.fish
+    dest: /home/{{ ansible_ssh_user }}/.config/fish/functions/updatevim.fish
+    mode: 0664
+    owner: "{{ ansible_ssh_user }}"

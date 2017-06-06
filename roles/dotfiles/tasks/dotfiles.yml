@@ -1,7 +1,0 @@
----
-- name: Clone dotfile repositpry
-  git:
-    repo: https://github.com/patrickocoffeyo/dotfiles.git
-    dest: /home/{{ ansible_ssh_user }}/.dotfiles
-    update: yes
-    recursive: yes

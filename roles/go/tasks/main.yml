@@ -1,0 +1,17 @@
+---
+- name: Install go.
+  become: yes
+  apt:
+    name: golang-go
+    state: installed
+    update_cache: yes
+
+- name: Create go workspace.
+  file:
+    path: /home/{{ ansible_ssh_user }}/Projects/go
+    state: directory
+
+- name: Create go bin.
+  file:
+    path: /home/{{ ansible_ssh_user }}/Projects/go/bin
+    state: directory

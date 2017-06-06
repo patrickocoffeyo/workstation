@@ -1,6 +1,10 @@
 ---
-- include: dotfiles.yml
 - include: fish.yml
 - include: vim.yml
 - include: git.yml
 - include: gnome_terminal.yml
+
+- name: Scaffold project directory.
+  file:
+    path: /home/{{ ansible_ssh_user }}/Projects
+    state: directory

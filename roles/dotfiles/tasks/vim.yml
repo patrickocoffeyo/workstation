@@ -4,21 +4,59 @@
     name: vim
     state: present
 
-- name: Remove default vim user folder.
+- name: Copy .vimrc to user home.
+  copy:
+    src: .vimrc
+    dest: /home/{{ ansible_ssh_user }}/.vimrc
+    mode: 0664
+    owner: "{{ ansible_ssh_user }}"
+
+- name: Ensure .vim directory exists in user home.
   file:
     path: /home/{{ ansible_ssh_user }}/.vim
-    state: absent
+    state: directory
 
-- name: Copy .vim directory.
-  file:
-    src: /home/{{ ansible_ssh_user }}/.dotfiles/.vim
-    dest: /home/{{ ansible_ssh_user }}/.vim
-    state: link
-    owner: "{{ ansible_ssh_user }}"
+- name: Install Vundle.
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: /home/{{ ansible_ssh_user }}/.vim/bundle/Vundle.vim
 
-- name: Symlink .vimrc.
+#- name: Install Vundle plugin bundles.
+#  shell: vim +BundleInstall! +BundleClean +qall && exit
+#  args:
+#    executable: /bin/sh
+
+- name: Ensure .vim/colors directory exists in user home.
   file:
-    src: /home/{{ ansible_ssh_user }}/.dotfiles/.vimrc
-    dest: /home/{{ ansible_ssh_user }}/.vimrc
-    state: link
-    owner: "{{ ansible_ssh_user }}"
+    path: /home/{{ ansible_ssh_user }}/.vim/colors
+    state: directory
+
+- name: Install Tomorrow Night Blue theme for vim.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Blue.vim
+    dest: /home/{{ ansible_ssh_user}}/.vim/colors
+    mode: 0664
+
+- name: Install Tomorrow Night Bright theme for vim.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Bright.vim
+    dest: /home/{{ ansible_ssh_user}}/.vim/colors
+    mode: 0664
+
+- name: Install Tomorrow Night Eighties theme for vim.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night-Eighties.vim
+    dest: /home/{{ ansible_ssh_user}}/.vim/colors
+    mode: 0664
+
+- name: Install Tomorrow Night theme for vim.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim
+    dest: /home/{{ ansible_ssh_user}}/.vim/colors
+    mode: 0664
+
+- name: Install Tomorrow base theme for vim.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow.vim
+    dest: /home/{{ ansible_ssh_user}}/.vim/colors
+    mode: 0664
