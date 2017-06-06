@@ -1,0 +1,17 @@
+---
+
+- name: Install Build Essentials
+  become: yes
+  apt:
+    name: build-essential
+    state: present
+
+- name: Install GNU Compiler Collection
+  become: yes
+  apt:
+    name: gcc
+    state: present
+
+- name: Install Linux Headers
+  become: yes
+  shell: apt-get install -y linux-headers-$(uname -r)

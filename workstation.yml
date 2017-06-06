@@ -5,5 +5,7 @@
   connection: local
   user: "{{ workstation_user }}"
   roles:
+    - general
     - cleanup
     - go
+    - virtualization

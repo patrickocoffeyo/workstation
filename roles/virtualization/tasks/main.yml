@@ -1,0 +1,36 @@
+---
+
+- name: Configure the Oracle APT key
+  become: true
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
+
+- name: Add Virtualbox repository.
+  become: true
+  shell: apt-add-repository "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib"
+
+- name: Add Virtualbox key.
+  become: true
+  apt_key:
+    url: "http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc"
+    state: present
+
+- name: Add Virtualbox year key.
+  become: true
+  apt_key:
+    url: "http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc"
+    state: present
+
+- name: Install Virtualbox.
+  become: true
+  apt:
+    name: virtualbox-5.1
+    state: present
+    update_cache: yes
+
+- name: Install Vagrant.
+  become: true
+  apt:
+    name: vagrant
+    state: installed
