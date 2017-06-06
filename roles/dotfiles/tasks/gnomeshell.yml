@@ -1,4 +1,0 @@
----
-- name: Generate Gnome Shell theme.
-  become: yes
-  script: /home/{{ ansible_ssh_user }}/.dotfiles/gnome-terminal-theme.sh

@@ -1,6 +1,2 @@
 # These roles are pulled from Ansible Galaxy, and are to be
 # installed prior to executing this playbook.
- 
-- src: leonidas.nvm
-- src: azavea.vagrant
-- src: hubisan.virtualbox

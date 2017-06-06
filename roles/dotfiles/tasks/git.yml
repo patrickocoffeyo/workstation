@@ -1,12 +1,12 @@
 ---
-- name: Symlink .gitconfig
+- name: Symlink .gitconfig.
   file:
     src: /home/{{ ansible_ssh_user }}/.dotfiles/.gitconfig
     dest: /home/{{ ansible_ssh_user }}/.gitconfig
     state: link
     owner: "{{ ansible_ssh_user }}"
 
-- name: Symlink global .gitignore
+- name: Symlink global .gitignore.
   file:
     src: /home/{{ ansible_ssh_user }}/.dotfiles/.gitignore
     dest: /home/{{ ansible_ssh_user }}/.gitignore
