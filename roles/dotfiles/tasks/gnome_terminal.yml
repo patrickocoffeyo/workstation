@@ -1,3 +1,15 @@
 ---
+- name: Download Tomorrow theme.
+  get_url:
+    url: https://raw.githubusercontent.com/chriskempson/tomorrow-theme/master/Gnome-Terminal/setup-theme.sh
+    dest: /home/{{ ansible_ssh_user}}/setup-theme.sh
+    mode: a+x
+
 - name: Install Tomorrow theme.
-  shell: /home/{{ ansible_ssh_user }}/.dotfiles/setup-theme.sh
+  shell: /home/{{ ansible_ssh_user }}/setup-theme.sh
+
+- name: Remove Tomorrow theme installation files.
+  file:
+    path: /home/{{ ansible_ssh_user }}/setup-theme.sh
+    state: absent
+
