@@ -1,6 +1,6 @@
 ---
 - name: Install Fish shell.
-  sudo: yes
+  become: yes
   apt:
     name: fish
     state: present
@@ -27,9 +27,37 @@
     mode: 0664
     owner: "{{ ansible_ssh_user }}"
 
-- name: Copy updatevim.fish to correct path
+- name: Copy updatevim.fish to correct path.
   copy:
     src: updatevim.fish
     dest: /home/{{ ansible_ssh_user }}/.config/fish/functions/updatevim.fish
     mode: 0664
     owner: "{{ ansible_ssh_user }}"
+
+- name: Download Oh-My-Fish installer.
+  shell: wget -O /tmp/omf.fish https://get.oh-my.fish
+
+- name: Execute Oh-My-Fish installer
+  async: 60
+  poll: 5
+  shell: fish /tmp/omf.fish --noninteractive
+  args:
+    executable: /usr/bin/fish
+
+- name: Delete Oh-My-Fish installer.
+  file:
+    path: /tmp/omf.fish
+    state: absent
+
+- name: Install Agnoster.
+  shell: omf install agnoster
+  args:
+    executable: /usr/bin/fish
+
+- name: Download Powerline fonts.
+  git:
+    repo: https://github.com/powerline/fonts.git
+    dest: /tmp/powerline-fonts
+
+- name: Install Powerline fonts.
+  shell: /tmp/powerline-fonts/install.sh
