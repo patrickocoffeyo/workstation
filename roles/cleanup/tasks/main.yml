@@ -1,0 +1,11 @@
+---
+- name: Clean out un-wanted packages.
+  apt: pkg={{ item }} state=absent purge=yes
+  become: yes
+  with_items:
+    - rhythmbox
+    - evolution
+    - evolution-common
+    - evolution-plugins
+    - gnome-weather
+    - gnome-maps

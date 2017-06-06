@@ -1,0 +1,7 @@
+---
+- include: dotfiles.yml
+- include: fish.yml
+- include: vim.yml
+- include: gnomeshell.yml
+- include: git.yml
+

@@ -1,0 +1,24 @@
+---
+- name: Install vim.
+  apt:
+    name: vim
+    state: present
+
+- name: Remove default vim user folder.
+  file:
+    path: /home/{{ ansible_ssh_user }}/.vim
+    state: absent
+
+- name: Copy .vim directory.
+  file:
+    src: /home/{{ ansible_ssh_user }}/.dotfiles/.vim
+    dest: /home/{{ ansible_ssh_user }}/.vim
+    state: link
+    owner: "{{ ansible_ssh_user }}"
+
+- name: Symlink .vimrc.
+  file:
+    src: /home/{{ ansible_ssh_user }}/.dotfiles/.vimrc
+    dest: /home/{{ ansible_ssh_user }}/.vimrc
+    state: link
+    owner: "{{ ansible_ssh_user }}"

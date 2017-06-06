@@ -1,0 +1,11 @@
+---
+- name: Install Fish shell.
+  sudo: yes
+  apt:
+    name: fish
+    state: present
+
+- name: Set Fish as the default shell.
+  user:
+    name: "{{ workstation_user }}"
+    shell: /usr/bin/fish
