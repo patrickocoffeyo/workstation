@@ -6,10 +6,9 @@
     mode: a+x
 
 - name: Install Tomorrow theme.
-  shell: /tmp/setup-theme.sh
+  shell: /tmp/setup-theme.sh Tomorrow-Night-Bright
 
 - name: Remove Tomorrow theme installation files.
   file:
     path: /tmp/setup-theme.sh
     state: absent
-
