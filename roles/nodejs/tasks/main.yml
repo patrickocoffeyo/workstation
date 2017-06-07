@@ -9,6 +9,11 @@
 - name: Execute NVM installer.
   shell: /tmp/nvm.sh
 
+- name: Delete NVM installer.
+  file:
+    path: /tmp/nvm.sh
+    state: absent
+
 - name: Install latest stable version of node.
   become: yes
   become_user: "{{ workstation_user }}"

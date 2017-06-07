@@ -1,0 +1,6 @@
+---
+
+- name: Download and install Keybase.
+  become: yes
+  apt:
+    deb: https://prerelease.keybase.io/keybase_amd64.deb

@@ -6,13 +6,14 @@
   user: "{{ workstation_user }}"
   become: yes
   roles:
-    - role: nodejs
-      nvm_version: v0.33.2
     - general
     - cleanup
     - go
     - virtualization
     - php
+    - keybase
     - geerlingguy.composer
     - geerlingguy.drush
     - geerlingguy.drupal-console
+    - role: nodejs
+      nvm_version: v0.33.2
