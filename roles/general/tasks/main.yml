@@ -3,3 +3,4 @@
 - include: silver_searcher.yml
 - include: nfs.yml
 - include: build_essentials.yml
+- include: curl.yml

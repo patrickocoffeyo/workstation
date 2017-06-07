@@ -1,0 +1,17 @@
+---
+
+- name: Download NVM installer.
+  get_url:
+    url: "https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh"
+    dest: /tmp/nvm.sh
+    mode: a+x
+
+- name: Execute NVM installer.
+  shell: /tmp/nvm.sh
+
+- name: Install latest stable version of node.
+  become: yes
+  become_user: "{{ workstation_user }}"
+  shell: bass source ~/.nvm/nvm.sh --no-use ';' nvm install stable
+  args:
+    executable: /usr/bin/fish

@@ -1,0 +1,7 @@
+---
+
+- name: Install PHP CLI.
+  become: yes
+  apt:
+    name: php7.0-cli
+    state: installed

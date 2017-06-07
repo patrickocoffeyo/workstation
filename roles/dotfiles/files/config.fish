@@ -16,3 +16,5 @@ set fish_color_search_match f0c674
 set fish_color_operator 8abeb7
 set fish_color_escape 8abeb7
 set fish_color_cwd b5bd68
+
+bass source ~/.nvm/nvm.sh --no-use ';' nvm use stable

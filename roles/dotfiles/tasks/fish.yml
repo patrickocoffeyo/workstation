@@ -35,7 +35,9 @@
     owner: "{{ ansible_ssh_user }}"
 
 - name: Download Oh-My-Fish installer.
-  shell: wget -O /tmp/omf.fish https://get.oh-my.fish
+  get_url:
+    url: https://get.oh-my.fish
+    dest: /tmp/omf.fish
 
 - name: Execute Oh-My-Fish installer
   async: 60
@@ -48,6 +50,21 @@
   file:
     path: /tmp/omf.fish
     state: absent
+
+- name: Install Fisherman.
+  get_url:
+    url: https://git.io/fisher
+    dest: "/home/{{ ansible_ssh_user }}/.config/fish/functions/fisher.fish"
+
+- name: Source fish config.
+  shell: source ~/.config/fish/config.fish
+  args:
+    executable: /usr/bin/fish
+
+- name: Install Bass.
+  shell: fisher edc/bass
+  args:
+    executable: /usr/bin/fish
 
 - name: Install Agnoster.
   shell: omf install agnoster

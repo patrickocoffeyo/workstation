@@ -1,2 +1,6 @@
 # These roles are pulled from Ansible Galaxy, and are to be
 # installed prior to executing this playbook.
+
+- src: geerlingguy.composer
+- src: geerlingguy.drush
+- src: geerlingguy.drupal-console
