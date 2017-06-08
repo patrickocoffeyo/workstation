@@ -1,0 +1,13 @@
+---
+
+- name: Install PSensor.
+  become: yes
+  apt:
+    name: psensor
+    state: present
+
+- name: Install htop.
+  become: yes
+  apt:
+    name: htop
+    state: present

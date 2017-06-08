@@ -20,3 +20,8 @@
   shell: bass source ~/.nvm/nvm.sh --no-use ';' nvm install stable
   args:
     executable: /usr/bin/fish
+
+- name: Install NVM for Fish.
+  shell: fisher nvm
+  args:
+    executable: /usr/bin/fish
