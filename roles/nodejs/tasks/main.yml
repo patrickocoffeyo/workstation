@@ -7,6 +7,8 @@
     mode: a+x
 
 - name: Execute NVM installer.
+  become: yes
+  become_user: "{{ workstation_user }}"
   shell: /tmp/nvm.sh
 
 - name: Delete NVM installer.
@@ -14,14 +16,23 @@
     path: /tmp/nvm.sh
     state: absent
 
-- name: Install latest stable version of node.
+- name: Source fish config.
   become: yes
   become_user: "{{ workstation_user }}"
-  shell: bass source ~/.nvm/nvm.sh --no-use ';' nvm install stable
+  shell: source ~/.config/fish/config.fish
   args:
     executable: /usr/bin/fish
 
 - name: Install NVM for Fish.
+  become: yes
+  become_user: "{{ workstation_user }}"
   shell: fisher nvm
+  args:
+    executable: /usr/bin/fish
+
+- name: Install latest stable version of node.
+  become: yes
+  become_user: "{{ workstation_user }}"
+  shell: nvm install stable ; nvm alias default stable
   args:
     executable: /usr/bin/fish

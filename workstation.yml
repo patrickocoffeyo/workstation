@@ -11,7 +11,6 @@
     - go
     - virtualization
     - php
-    - keybase
     - geerlingguy.composer
     - geerlingguy.drush
     - geerlingguy.drupal-console
