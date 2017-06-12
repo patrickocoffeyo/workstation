@@ -1,7 +1,9 @@
 ---
 
+- include: curl.yml
+- include: chrome.yml
 - include: silver_searcher.yml
 - include: nfs.yml
 - include: build_essentials.yml
-- include: curl.yml
+- include: keybase.yml
 - include: monitoring.yml
