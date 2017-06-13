@@ -5,6 +5,10 @@ This repository contains a set of Ansible roles and playbooks that fully build a
  - Install git.
  - Install ansible.
  - Clone this repository.
+ - Install Galaxy roles:
+ ```bash
+ ansible-galaxy install -r galaxy_roles.yml
+ ```
  - Run the `workstation-single.yml` playbook:
  ```bash
  ansible-playbook -i "localhost," -c local workstation-single.yml --ask-sudo-pass --extra-vars "workstation_user=user_to_be_provisioned"
