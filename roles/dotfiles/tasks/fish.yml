@@ -12,6 +12,11 @@
     name: "{{ workstation_user }}"
     shell: /usr/bin/fish
 
+- name: Ensure go workspace.
+  file:
+    path: /home/{{ ansible_ssh_user }}/Projects/go
+    state: directory
+
 - name: Ensure ~/.config/fish directory exists in user home.
   file:
     path: /home/{{ ansible_ssh_user }}/.config/fish
