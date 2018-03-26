@@ -34,3 +34,8 @@
   apt:
     name: vagrant
     state: installed
+
+- name: Download and install Lando
+  become: yes
+  apt:
+    deb: https://github.com/lando/lando/releases/download/v3.0.0-beta.35/lando-v3.0.0-beta.35.deb

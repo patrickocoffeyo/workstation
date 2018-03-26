@@ -6,10 +6,10 @@
   user: "{{ workstation_user }}"
   become: yes
   roles:
+    - virtualization
     - general
     - cleanup
     - go
-    - virtualization
     - php
     - geerlingguy.composer
     - geerlingguy.drush
