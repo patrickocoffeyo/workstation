@@ -1,7 +1,6 @@
 set nocompatible
 syntax on
 filetype on
-filetype off
 set shell=/bin/bash
 
 " vundle
@@ -18,6 +17,7 @@ Plugin 'joonty/vdebug'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'mileszs/ack.vim'
 Plugin 'miripiruni/CSScomb-for-Vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -26,13 +26,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-cucumber'
-Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-pastie'
 Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -71,12 +67,6 @@ set report=0                                                             " Alway
 set ruler                                                                " show line and column number of cursor
 set cursorline                                                           " higlight screen line of the cursor
 set scrolloff=4                                                          " scroll offset
-let g:go_disable_autoinstall = 0                                         " enable autoinstall for vim-go
-let g:go_highlight_functions = 1                                         " turn on function highlighting for go
-let g:go_highlight_methods = 1                                           " turn on method highlighting for go
-let g:go_highlight_structs = 1                                           " turn on struct highlighting for go
-let g:go_highlight_operators = 1                                         " turn on operators highlighting for go
-let g:go_highlight_build_constraints = 1                                 " turn on build constraint highlighting for go
 
 " search
 set ignorecase                                                           " case-insensitive search
@@ -126,6 +116,19 @@ let g:vdebug_features= {
 \  "max_children" : 128,
 \}
 
+" vim-javascript settings.
+let g:javascript_plugin_jsdoc = 1                                        "enable jsdoc
+let g:javascript_plugin_flow = 1                                         "enable flow
+let g:jsx_ext_required = 0
+
+let g:go_disable_autoinstall = 0                                         " enable autoinstall for vim-go
+let g:go_highlight_functions = 1                                         " turn on function highlighting for go
+let g:go_highlight_methods = 1                                           " turn on method highlighting for go
+let g:go_highlight_structs = 1                                           " turn on struct highlighting for go
+let g:go_highlight_operators = 1                                         " turn on operators highlighting for go
+let g:go_highlight_build_constraints = 1                                 " turn on build constraint highlighting for go
+
+
 " key mapping
 let mapleader = ','
 map <C-h> <C-w>h
@@ -140,7 +143,6 @@ nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CtrlP<CR>
 nmap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nmap <leader>] :TagbarToggle<CR>
-nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :GitGutterToggle<CR>
 nmap <leader>c <Plug>Kwbd
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -161,39 +163,39 @@ map <leader>s  :%s/\s\+$//<cr>:let @/=''<CR>
 
 " filetypes
 filetype plugin indent on
-if has("autocmd")
-  augroup php
-    autocmd BufRead,BufNewFile *.module set filetype=php
-    autocmd BufRead,BufNewFile *.install set filetype=php
-    autocmd BufRead,BufNewFile *.test set filetype=php
-    autocmd BufRead,BufNewFile *.inc set filetype=php
-    autocmd BufRead,BufNewFile *.profile set filetype=php
-    autocmd BufRead,BufNewFile *.view set filetype=php
-    autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-    autocmd BufRead,BufNewFile *.twig set ft=htmldjango
-  augroup END
+augroup php
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.install set filetype=php
+  autocmd BufRead,BufNewFile *.test set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+  autocmd BufRead,BufNewFile *.profile set filetype=php
+  autocmd BufRead,BufNewFile *.view set filetype=php
+  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+  autocmd BufRead,BufNewFile *.twig set ft=htmldjango
+augroup END
 
-  augroup js
-    autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
-  augroup END
+augroup js
+  autocmd BufRead,BufNewFile *.js set filetype=javascript.jsx syntax=javascript.jsx
+  autocmd BufRead,BufNewFile *.jsx set filetype=jsx syntax=jsx
+augroup END
 
-  augroup markup
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
-    autocmd BufRead,BufNewFile *.md set spell
-  augroup END
+augroup markup
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile *.md set spell
+augroup END
 
-  augroup frontend
-    autocmd BufNewFile,BufRead *.less set filetype=less
-  augroup END
+augroup frontend
+  autocmd BufNewFile,BufRead *.less set filetype=css
+  autocmd BufNewFile,BufRead *.scss set filetype=css
+  autocmd BufNewFile,BufRead *.sass set filetype=css
+augroup END
 
-  augroup rubylang
-    autocmd BufRead,BufNewFile *.rabl set ft=ruby
-    autocmd BufRead,BufNewFile *.rb set ft=ruby
-  augroup END
+augroup rubylang
+  autocmd BufRead,BufNewFile *.rabl set filetype=ruby
+  autocmd BufRead,BufNewFile *.rb set filetype=ruby
+augroup END
 
-  augroup golang
-    autocmd BufRead,BufNewFile *.go set filetype=go
-    autocmd FileType go set tabstop=2|set shiftwidth=2|set noexpandtab|set nolist
-  augroup END
-endif
-nnoremap ,m :w <BAR> !lessc % > %:t:r.css<CR><space>
+augroup golang
+  autocmd BufRead,BufNewFile *.go set filetype=go
+  autocmd FileType go set tabstop=2|set shiftwidth=2|set noexpandtab|set nolist
+augroup END
