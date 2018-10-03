@@ -176,12 +176,19 @@ augroup END
 
 augroup js
   autocmd BufRead,BufNewFile *.js set filetype=javascript.jsx syntax=javascript.jsx
-  autocmd BufRead,BufNewFile *.jsx set filetype=jsx syntax=jsx
+  autocmd BufRead,BufNewFile *.jsx set filetype=javascript.jsx syntax=javascript.jsx
 augroup END
 
 augroup markup
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile *.md set spell
+augroup END
+
+augroup config
+  autocmd BufRead,BufNewFile *.yml set filetype=yaml
+  autocmd BufRead,BufNewFile *.yml set nospell
+  autocmd BufRead,BufNewFile *.yaml set filetype=yaml
+  autocmd BufRead,BufNewFile *.yaml set nospell
 augroup END
 
 augroup frontend
