@@ -2,6 +2,8 @@ setenv EDITOR vim
 
 set -xg GOROOT $HOME/Projects/go
 set -xg PATH $GOROOT/bin $PATH
+set -xg PATH ~/.local/bin $PATH
+alias terminus=/home/pcoffey/terminus/vendor/bin/terminus
 
 set fish_color_normal c5c8c6
 set fish_color_command b294bb

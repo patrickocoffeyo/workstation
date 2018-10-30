@@ -36,6 +36,7 @@ Plugin 'tpope/vim-vividchalk'
 Plugin 'vim-scripts/Align'
 Plugin 'vim-scripts/greplace.vim'
 Plugin 'vim-scripts/matchit.zip'
+Plugin 'jparise/vim-graphql'
 
 call vundle#end()
 
@@ -55,7 +56,6 @@ set laststatus=2                                                         " alway
 set statusline=\%L%m%r%h\ %w\ \ pwd:\ %r%{getcwd()}%h\ \ \ Line:\ %l     " fancy status line
 set list                                                                 " show whitespace
 set listchars=tab:→\ ,trail:·
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildmenu                                                             " show tab completion menu
 set wildmode=longest,list,full
 set nowrap                                                               " no wrapping by default
@@ -97,7 +97,7 @@ colorscheme Tomorrow-Night
 " vdebug settings
 let g:vdebug_options = {
 \  "port" : 9000,
-\  "server" : "localhost",
+\  "server" : "192.168.88.88",
 \  "timeout" : 60,
 \  "on_close" : 'detach',
 \  "break_on_open" : 0,
@@ -116,9 +116,13 @@ let g:vdebug_features= {
 \  "max_children" : 128,
 \}
 
+" nerdtree settings.
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
 " vim-javascript settings.
-let g:javascript_plugin_jsdoc = 1                                        "enable jsdoc
-let g:javascript_plugin_flow = 1                                         "enable flow
+let g:javascript_plugin_jsdoc = 1                                        " enable jsdoc
+let g:javascript_plugin_flow = 1                                         " enable flow
 let g:jsx_ext_required = 0
 
 let g:go_disable_autoinstall = 0                                         " enable autoinstall for vim-go
@@ -177,6 +181,7 @@ augroup END
 augroup js
   autocmd BufRead,BufNewFile *.js set filetype=javascript.jsx syntax=javascript.jsx
   autocmd BufRead,BufNewFile *.jsx set filetype=javascript.jsx syntax=javascript.jsx
+  autocmd BufRead,BufNewFile *.graphql set filetype=graphql syntax=graphql
 augroup END
 
 augroup markup
